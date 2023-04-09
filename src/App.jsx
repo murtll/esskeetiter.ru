@@ -43,8 +43,15 @@ const App = () => {
   return (
     <ReactTerminal
       welcomeMessage={<Welcome/>}
-      theme='matrix'
-      prompt='murtll@esskeetiter.ru $'
+      themes={{
+        customdark: {
+          themeBGColor: '#02040a',
+          themeColor: '#d2d8de',
+          themePromptColor: '#79c0ff'
+        }
+      }}
+      theme='customdark'
+      prompt={<a>murtll@esskeetiter.ru <a style={{color: '#bc8cff'}}>~</a> <a style={{color: 'white'}}>$</a></a>}
       showControlBar={false}
       showControlButtons={false}
       errorMessage='command not found'
