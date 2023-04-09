@@ -1,58 +1,52 @@
+import { useEffect, useState } from 'react'
 import { ReactTerminal } from 'react-terminal'
 
 import { Welcome } from './Welcome'
+import * as co from './CommandOutputs'
 
 import './App.css'
 
 const App = () => {
-
-  const files = ['about.txt', 
-                 'cv.md',
-                 'socials.md']
-
-  const longFiles = <p>
-    total 104
-    <br/>
-    -rw-r--r--   1 murtll murtll  451B Apr  8 16:46 about.txt
-    <br/>
-    -rw-r--r--   1 murtll murtll  301B Apr  8 17:41 cv.md
-    <br/>
-    -rw-r--r--   1 murtll murtll  163B Apr  8 16:42 socials.md
-  </p>
-
   const commands = {
-    help: <p>
-      whoami: shows current user
-      <br/>
-      exit: close terminal
-      <br/>
-      pwd: show current directory
-      <br/>
-      ls | ll: list files in current directory
-      <br/>
-      help: display this help
-    </p>,
+    help: co.help,
     whoami: 'murtll',
     exit: window.close,
     pwd: '/home/murtll',
     ls: (flags) => {
       if (flags == '-lah' || flags == '-la' || flags == '-l') {
-        return longFiles
+        return co.longFiles
       }
-      return files.join(' ')
+      return co.files.join(' ')
     },
-    ll: longFiles,
-    la: longFiles
+    ll: co.longFiles,
+    la: co.longFiles,
+    cat: (file) => {
+      switch (file) {
+        case '':
+          return 'usage: cat <file>'
+        case 'about.txt':
+          return co.about
+        default:
+          return `cat: ${file}: no such file or directory`
+      }
+    }
   }
+
+  const [height, setHeight] = useState(0);
+  setInterval(() => { 
+    setHeight(document.documentElement.scrollHeight)
+  }, 100)
+  useEffect(() => {
+    window.scrollTo(0, height)
+  }, [height])
 
   return (
     <ReactTerminal
       welcomeMessage={<Welcome/>}
-      id='term'
       theme='matrix'
       prompt='murtll@esskeetiter.ru $'
-      showControlBar='false'
-      showControlButtons='false'
+      showControlBar={false}
+      showControlButtons={false}
       errorMessage='command not found'
       commands={commands}
     />
