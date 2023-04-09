@@ -27,11 +27,9 @@ export const help = <p>
     </p>
 
 export const about = <p>
-    My name is <a href="https://github.com/murtll">@murtll</a> and currently I am working in <a href="https://onetwotrip.com">OneTwoTrip</a> as Junior DevOps Engineer.
-    <br/>
-    However, I am also interesed in many other IT areas, such as backend development and CLI/TUI utilities for Linux systems.
-    <br/>
-    Also I am working on some personal projects (such as <a href="https://mcbrawl.ru">mcbrawl.ru</a>), where I am trying to master some new for me technologies.
-    <br/>
-    Checkout my Github profile for some interesting projects.
-</p>
+        My name is <a href="https://github.com/murtll">@murtll</a> and currently I am working in <a href="https://onetwotrip.com">OneTwoTrip</a> as Junior DevOps Engineer.
+        <br/>
+        However, I am also interesed in many other IT areas, such as backend development and CLI/TUI utilities for Linux systems.
+        <br/>
+        Also I am working on some personal projects (such as <a href="https://mcbrawl.ru">mcbrawl.ru</a>), where I am trying to master some new for me technologies.
+    </p>

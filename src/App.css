@@ -8,9 +8,9 @@
 
 @keyframes glow {
   from {
-    text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 3px aqua, 0 0 40px aqua, 0 0 5px aqua, 0 0 6px aqua, 0 0 7px aqua;
+    text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 3px aqua, 0 0 4px aqua;
   }
   to {
-    text-shadow: 0 0 2px #fff, 0 0 3px aquamarine, 0 0 4px aquamarine, 0 0 5px aquamarine, 0 0 6px aquamarine, 0 0 7px aquamarine, 0 0 8px aquamarine;
+    text-shadow: 0 0 4px #fff, 0 0 6px aquamarine, 0 0 8px aquamarine, 0 0 10px aquamarine;
   }
 }
