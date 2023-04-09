@@ -21,4 +21,4 @@ RUN rm -rf /var/cache/apk/*  \
 
 COPY default.conf /etc/nginx/conf.d/
 
-COPY --from=BUILDER /app/build /usr/share/nginx/html
+COPY --from=BUILDER /app/dist /usr/share/nginx/html
