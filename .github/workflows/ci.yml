@@ -40,16 +40,6 @@ jobs:
           cache-from: type=registry,ref=${{ steps.image.outputs.image_name }}-buildcache:${{ github.ref_name }}
           cache-to: type=registry,ref=${{ steps.image.outputs.image_name }}-buildcache:${{ github.ref_name }},mode=max
 
-      - name: Failure notify
-        if: ${{ failure() }}
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            ❌ ${{ github.actor }} pushed changes and job ${{ github.job }} failed.
-            see workflow run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
   deploy:
     name: Deploy
     needs:
@@ -82,26 +72,6 @@ jobs:
           ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ vars.SERVER }} "mkdir -p ${{ github.repository }}"
           scp -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no docker-compose.configured.yml ${{ secrets.SSH_USER }}@${{ vars.SERVER }}:${{ github.repository }}/docker-compose.yml
           ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ vars.SERVER }} "cd ${{ github.repository }} && docker login ${{ vars.DOCKER_REGISTRY }} -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ github.token }} && docker compose pull && docker compose up -d"
-
-      - name: Success notify
-        if: ${{ success() }}
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            ✅ ${{ github.actor }} pushed changes and job ${{ github.job }} succeed.
-            see workflow run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
-      - name: Failure notify
-        if: ${{ failure() }}
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            ❌ ${{ github.actor }} pushed changes and job ${{ github.job }} failed.
-            see workflow run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
       - name: Cleanup images
         run: |
