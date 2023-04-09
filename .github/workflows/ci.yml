@@ -10,6 +10,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-22.04
+    permissions:
+      packages: write
     outputs:
       image_name: ${{ steps.image.outputs.image_name }}
     steps:
